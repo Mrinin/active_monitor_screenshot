@@ -16,13 +16,13 @@ This will automatically launch this application on startup.
 
 While the app is open, simply press PrntScreen to screenshot. This will play a simple sound effect.
 
-If there's no sound effect and no screenshot was taken, check the filepath! It may be invalid on your computer.
+If there's instead an error sound effect and no screenshot was taken, check the filepath! It may be invalid on your computer.
 
 # Config
 
 Inside the folder you unzipped, you can find a folder called "config.txt". You can change a couple settings here:
 
-1. ilename: Filename of the screenshot. You can define variables with `{variable}`. Default filename is: `Screenshot 20{year}-{month}-{day} {hour}.{minute}.{second}{repeat_empty}{repeat}`. You can use `/` to define subfolders with variables, if you like.
+1. filename: Filename of the screenshot. You can define variables with `{variable}`. Default filename is: `Screenshot 20{year}-{month}-{day} {hour}.{minute}.{second}{repeat_empty}{repeat}`. You can use `/` to define subfolders with variables, if you like.
 -    {year}: last two digits of the year
 -    {month}: month number
 -    {day}: day number
