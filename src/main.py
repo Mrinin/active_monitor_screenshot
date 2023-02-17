@@ -64,6 +64,21 @@ def take_screenshot():
 
             i += 1
 
+        filename = "screenshot"
+        repeat = 0
+        while True:
+            name = format_filename(repeat, active_monitor)
+            filename = f"{get_output_folder()}{name}.png"
+            if not path.exists(filename):
+                break
+            repeat += 1
+            if repeat > 1000:
+                print("File name not valid!")
+                raise FileNotFoundError
+
+        if settings["play_sound_effect"] == "True":
+            winsound.PlaySound('screenshot_taken.wav', winsound.SND_FILENAME | winsound.SND_ASYNC)
+
         # If it could not find it, default to the primary screenshot (with the 0 initial value)
         # https://python-mss.readthedocs.io/examples.html
         print(f"Taking screenshot of monitor #{active_monitor}")
@@ -79,22 +94,8 @@ def take_screenshot():
             print(f"Downscaling Image to {scale}% of the resolution")
             img = resize_image(img, int(resolution_x[active_monitor] * int(scale) * 0.01))
 
-        filename = "screenshot"
-        repeat = 0
-        while True:
-            name = format_filename(repeat, active_monitor)
-            filename = f"{get_output_folder()}{name}.png"
-            if not path.exists(filename):
-                break
-            repeat += 1
-            if repeat > 1000:
-                break
-
         print(filename)
         img.save(filename)
-
-        if settings["play_sound_effect"] == "True":
-            winsound.PlaySound('screenshot_taken.wav', winsound.SND_FILENAME)
 
 
 # resizes image while keeping aspect ratio
@@ -182,7 +183,11 @@ def read_config():
 
 def on_press(key):
     if key == Key.print_screen:
-        take_screenshot()
+        try:
+            take_screenshot()
+        except:
+            winsound.PlaySound('SystemExclamation', winsound.SND_ALIAS | winsound.SND_ASYNC)
+            print("Folder was not found!")
 
 
 class POINT(Structure):

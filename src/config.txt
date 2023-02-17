@@ -1,4 +1,4 @@
-filename=Screenshot 20{year}-{month}-{day} {hour}.{minute}{repeat_empty}{repeat}
+filename=Screenshot 20{year}-{month}-{day} {hour}.{minute}.{second}{repeat_empty}{repeat}
 image_scale=100
 output_location_relative_to_pictures_folder=True
 output_location=Screenshots/
