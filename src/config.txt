@@ -1,5 +1,5 @@
 filename=Screenshot 20{year}-{month}-{day} {hour}.{minute}.{second}{repeat_empty}{repeat}
 image_scale=100
-output_location_relative_to_pictures_folder=False
-output_location=
+output_location_relative_to_pictures_folder=True
+output_location=Screenshots/
 play_sound_effect=True
