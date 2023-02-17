@@ -19,6 +19,8 @@ settings = {
 resolution_x = []
 resolution_y = []
 
+allow_screenshot = True
+
 
 def main():
     with mss() as sct:
@@ -44,7 +46,7 @@ def main():
 
 
     # check for key presses constantly
-    with Listener(on_press=on_press) as listener:
+    with Listener(on_press=on_press, on_release=on_release) as listener:
         listener.join()
 
 
@@ -182,12 +184,23 @@ def read_config():
 
 
 def on_press(key):
+    global allow_screenshot
+    if not allow_screenshot:
+        return
+
     if key == Key.print_screen:
         try:
             take_screenshot()
         except:
             winsound.PlaySound('SystemExclamation', winsound.SND_ALIAS | winsound.SND_ASYNC)
             print("Folder was not found!")
+        finally:
+            allow_screenshot = False
+
+
+def on_release(key):
+    global allow_screenshot
+    allow_screenshot = True
 
 
 class POINT(Structure):
